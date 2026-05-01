@@ -4,3 +4,11 @@ class TaskRepository:
 
     def adicionar(self, task):
         self._tasks.append(task)
+
+
+    def obter_por_id(self, task_id):
+        return next((t for t in self._tasks if t.id == task_id), None)
+
+
+    def listar(self):
+        return self._tasks

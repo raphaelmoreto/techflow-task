@@ -12,3 +12,14 @@ class TaskService:
         task = TasksEntity(titulo, descricao)
         self._repo.adicionar(task)
         return task
+    
+
+    def listar(self) -> List[TasksEntity]:
+        return self._repo.listar()
+
+    
+    def obter(self, task_id: UUID) -> TasksEntity:
+        task = self._repo.obter_por_id(task_id)
+        if not task:
+            raise Exception("Task não encontrada")
+        return task
