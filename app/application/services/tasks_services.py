@@ -23,3 +23,8 @@ class TaskService:
         if not task:
             raise Exception("Task não encontrada")
         return task
+    
+
+    def remover(self, task_id: UUID):
+        task = self.obter(task_id)  # GARANTE EXISTÊNCIA
+        self._repo.remover(task.id)

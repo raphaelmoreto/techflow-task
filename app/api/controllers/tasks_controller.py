@@ -18,6 +18,7 @@ def criar_task(titulo: str, descricao: str):
         "concluida": task.concluida
     }
 
+
 @tasks_controller.get("/")
 def listar_tasks():
     tasks = service.listar()
@@ -42,5 +43,14 @@ def obter_task(task_id: UUID):
             "descricao": task.descricao,
             "concluida": task.concluida
         }
+    except Exception as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    
+
+@tasks_controller.delete("/{task_id}")
+def deletar_task(task_id: UUID):
+    try:
+        service.remover(task_id)
+        return {"mensagem": "Tarefa removida"}
     except Exception as e:
         raise HTTPException(status_code=404, detail=str(e))

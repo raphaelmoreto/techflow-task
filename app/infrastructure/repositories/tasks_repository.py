@@ -12,3 +12,7 @@ class TaskRepository:
 
     def listar(self):
         return self._tasks
+    
+
+    def remover(self, task_id):
+        self._tasks = [t for t in self._tasks if t.id != task_id]
