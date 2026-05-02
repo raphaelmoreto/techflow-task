@@ -14,5 +14,13 @@ class TaskRepository:
         return self._tasks
     
 
+    def atualizar(self, task):
+        for i, t in enumerate(self._tasks):
+            if t.id == task.id:
+                self._tasks[i] = task
+                return
+        raise Exception("Task não encontrada")
+    
+
     def remover(self, task_id):
         self._tasks = [t for t in self._tasks if t.id != task_id]

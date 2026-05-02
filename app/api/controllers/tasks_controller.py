@@ -47,6 +47,29 @@ def obter_task(task_id: UUID):
         raise HTTPException(status_code=404, detail=str(e))
     
 
+@tasks_controller.patch("/tasks/{task_id}/concluir")
+def concluir_task(task_id: UUID):
+    try:
+        task = service.concluir(task_id)
+        return {"mensagem": "Tarefa concluída", "id": str(task.id)}
+    except Exception as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    
+
+@tasks_controller.put("/{task_id}")
+def atualizar_task(task_id: UUID, titulo: str, descricao: str):
+    try:
+        task = service.atualizar(task_id, titulo, descricao)
+        return {
+            "id": str(task.id),
+            "titulo": task.titulo,
+            "descricao": task.descricao,
+            "concluida": task.concluida
+        }
+    except Exception as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    
+
 @tasks_controller.delete("/{task_id}")
 def deletar_task(task_id: UUID):
     try:

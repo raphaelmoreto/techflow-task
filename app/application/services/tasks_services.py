@@ -25,6 +25,20 @@ class TaskService:
         return task
     
 
+    def concluir(self, task_id: UUID):
+        task = self.obter(task_id)
+        task.concluir()
+        self._repo.atualizar(task)
+        return task
+    
+
+    def atualizar(self, task_id: UUID, titulo: str, descricao: str):
+        task = self.obter(task_id)
+        task.atualizar(titulo, descricao)
+        self._repo.atualizar(task)
+        return task
+    
+
     def remover(self, task_id: UUID):
         task = self.obter(task_id)  # GARANTE EXISTÊNCIA
         self._repo.remover(task.id)
