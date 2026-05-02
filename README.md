@@ -23,5 +23,11 @@ Utilização de Kanban para organização:
 ## ▶️ Como executar
 
 ```bash
-pip install -r requirements.txt
-python app.py
+pip install fastapi uvicorn
+uvicorn app.main:app --reload
+```
+
+## 🔄 Gestão de Mudanças
+
+Durante o desenvolvimento, o cliente solicitou a adição de prioridade nas tarefas,
+para melhorar a organização e tomada de decisão da equipe.
