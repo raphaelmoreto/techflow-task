@@ -24,8 +24,8 @@ def test_criar_task(service):
 
 
 def test_listar_tasks(service):
-    service.criar('t1', 'd1')
-    service.criar('t2', 'd2')
+    service.criar('t1', 'd1', 1)
+    service.criar('t2', 'd2', 1)
 
     lista = service.listar()
 
@@ -33,7 +33,7 @@ def test_listar_tasks(service):
 
 
 def test_obter_task(service):
-    task = service.criar('t1', 'd1')
+    task = service.criar('t1', 'd1', 1)
 
     task_obtida = service.obter(task.id)
 
@@ -49,16 +49,17 @@ def test_obter_task_inexistente(service):
 
 
 def test_atualizar_task(service):
-    task = service.criar('t1', 'd1')
+    task = service.criar('t1', 'd1', 1)
 
-    task_atualizada = service.atualizar(task.id, 'novo titulo', 'nova descricao')
+    task_atualizada = service.atualizar(task.id, 'novo titulo', 'nova descricao', 3)
 
     assert task_atualizada.titulo == 'novo titulo'
     assert task_atualizada.descricao == 'nova descricao'
+    assert task_atualizada.prioridade == 3
 
 
 def test_concluir_task(service):
-    task = service.criar('t1', 'd1')
+    task = service.criar('t1', 'd1', 1)
 
     task_concluida = service.concluir(task.id)
 
@@ -66,7 +67,7 @@ def test_concluir_task(service):
 
 
 def test_concluir_task_ja_concluida(service):
-    task = service.criar('t1', 'd1')
+    task = service.criar('t1', 'd1', 1)
     service.concluir(task.id)
 
     with pytest.raises(Exception, match="Tarefa já está concluída"):
@@ -74,7 +75,7 @@ def test_concluir_task_ja_concluida(service):
 
 
 def test_remover_task(service):
-    task = service.criar('t1', 'd1')
+    task = service.criar('t1', 'd1', 1)
 
     service.remover(task.id)
 
