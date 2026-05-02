@@ -1,5 +1,5 @@
-from domain.entities.tasks_entity import TasksEntity
-from infrastructure.repositories.tasks_repository import TaskRepository
+from app.domain.entities.tasks_entity import TasksEntity
+from app.infrastructure.repositories.tasks_repository import TaskRepository
 from uuid import UUID
 from typing import List
 

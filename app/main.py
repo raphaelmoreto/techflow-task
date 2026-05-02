@@ -1,13 +1,14 @@
 from fastapi import FastAPI
-from api.controllers.tasks_controller import tasks_controller
+from app.api.controllers.tasks_controller import tasks_controller
 
 #EXECUTAR NO TERMINAL
 #pip install fastapi uvicorn
 #pip install -r requirements.txt
 #python app.py
 
-#RODAR A APLPICAÇÃO
-#uvicorn main:app --reload
+#RODAR A APLICAÇÃO À PARTIR DA PASTA 'Techflow-Task'. Exemplo no terminal:
+#C:\Users\{seu usuario}\{caminho onde está salvo o projeto na sua máquina}\Techflow-Task> uvicorn app.main:app --reload
+#uvicorn app.main:app --reload
 
 #ACESSAR NO NAVEGADOR
 #http://127.0.0.1:8000/docs

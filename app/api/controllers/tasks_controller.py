@@ -1,5 +1,5 @@
-from application.services.tasks_services import TaskService
-from infrastructure.repositories.tasks_repository import TaskRepository
+from app.application.services.tasks_services import TaskService
+from app.infrastructure.repositories.tasks_repository import TaskRepository
 from fastapi import APIRouter, HTTPException
 from uuid import UUID
 
