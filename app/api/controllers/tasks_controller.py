@@ -1,4 +1,5 @@
 from app.application.services.tasks_services import TaskService
+from app.domain.entities.enum_prioridade import PrioridadeEnum
 from app.infrastructure.repositories.tasks_repository import TaskRepository
 from fastapi import APIRouter, HTTPException
 from uuid import UUID
@@ -9,14 +10,18 @@ repo = TaskRepository()
 service = TaskService()
 
 @tasks_controller.post("/")
-def criar_task(titulo: str, descricao: str):
-    task = service.criar(titulo, descricao)
-    return {
-        "id": str(task.id),
-        "titulo": task.titulo,
-        "descricao": task.descricao,
-        "concluida": task.concluida
-    }
+def criar_task(titulo: str, descricao: str, prioridade: int):
+    try:
+        task = service.criar(titulo, descricao, prioridade)
+        return {
+            "id": str(task.id),
+            "titulo": task.titulo,
+            "descricao": task.descricao,
+            "prioridade": PrioridadeEnum(task.prioridade).name,
+            "concluida": task.concluida
+        }
+    except Exception as e:
+        raise HTTPException(status_code=404, detail=str(e))
 
 
 @tasks_controller.get("/")
@@ -27,6 +32,7 @@ def listar_tasks():
             "id": str(t.id),
             "titulo": t.titulo,
             "descricao": t.descricao,
+            "prioridade": PrioridadeEnum(t.prioridade).name,
             "concluida": t.concluida
         }
         for t in tasks
@@ -41,6 +47,7 @@ def obter_task(task_id: UUID):
             "id": str(task.id),
             "titulo": task.titulo,
             "descricao": task.descricao,
+            "prioridade": PrioridadeEnum(task.prioridade).name,
             "concluida": task.concluida
         }
     except Exception as e:
@@ -57,13 +64,14 @@ def concluir_task(task_id: UUID):
     
 
 @tasks_controller.put("/{task_id}")
-def atualizar_task(task_id: UUID, titulo: str, descricao: str):
+def atualizar_task(task_id: UUID, titulo: str, descricao: str, prioridade: int):
     try:
-        task = service.atualizar(task_id, titulo, descricao)
+        task = service.atualizar(task_id, titulo, descricao, prioridade)
         return {
             "id": str(task.id),
             "titulo": task.titulo,
             "descricao": task.descricao,
+            "prioridade": PrioridadeEnum(task.prioridade).name,
             "concluida": task.concluida
         }
     except Exception as e:

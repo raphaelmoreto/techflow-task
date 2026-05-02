@@ -13,12 +13,13 @@ def service():
 
 
 def test_criar_task(service):
-    task = service.criar('teste 1', 'descrição teste')
+    task = service.criar('teste 1', 'descrição teste', 1)
 
     lista = service.listar()
     assert len(lista) == 1
     assert lista[0].titulo == 'teste 1'
     assert lista[0].descricao == 'descrição teste'
+    assert lista[0].prioridade == 1
     assert lista[0].concluida is False
 
 

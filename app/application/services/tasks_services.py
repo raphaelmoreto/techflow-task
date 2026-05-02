@@ -8,8 +8,8 @@ class TaskService:
         self._repo = TaskRepository()
 
 
-    def criar(self, titulo: str, descricao: str):
-        task = TasksEntity(titulo, descricao)
+    def criar(self, titulo: str, descricao: str, prioridade: int):
+        task = TasksEntity(titulo, descricao, prioridade)
         self._repo.adicionar(task)
         return task
     
@@ -32,9 +32,9 @@ class TaskService:
         return task
     
 
-    def atualizar(self, task_id: UUID, titulo: str, descricao: str):
+    def atualizar(self, task_id: UUID, titulo: str, descricao: str, prioridade: int):
         task = self.obter(task_id)
-        task.atualizar(titulo, descricao)
+        task.atualizar(titulo, descricao, prioridade)
         self._repo.atualizar(task)
         return task
     
